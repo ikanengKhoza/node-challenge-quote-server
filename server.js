@@ -4,6 +4,9 @@
 //load the 'express' module which makes writing webservers easy
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(cors); // before our routes definition
 
 //load the quotes JSON
 const quotes = require("./quotes.json");
@@ -19,11 +22,11 @@ app.get("/", function (request, response) {
 //START OF YOUR CODE...
 
 app.get("/quotes", function (request, response) {
-  response.send(quotes);
+  response.json(quotes);
 });
 
 app.get("/quotes/random", function (request, response) {
-  response.send(pickFromArray(quotes));
+  response.json(pickFromArray(quotes));
 });
 
 //...END OF YOUR CODE
@@ -37,6 +40,6 @@ function pickFromArray(arr) {
 }
 
 //Start our server so that it listens for HTTP requests!
-const listener = app.listen(3000, function () {
+const listener = app.listen(3001, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
